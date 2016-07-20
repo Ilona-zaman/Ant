@@ -1,3 +1,6 @@
 version: 1.0.{build}
 build_script:
-- cmd: dotnet build src/Ant
+- cmd: >-
+    dotnet restore src/Ant
+
+    dotnet build scr/Ant
