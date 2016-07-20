@@ -3,4 +3,4 @@ build_script:
 - cmd: >-
     dotnet restore src/Ant
 
-    dotnet build scr/Ant
+    dotnet build src/Ant
