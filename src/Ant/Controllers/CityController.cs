@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ant.IRepositories;
-using Ant.Models;
+using Contracts.IRepositories;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,7 +38,7 @@ namespace Ant.Controllers
         public IActionResult Post([FromBody]City value)
         {
             _cityRepository.Add(value);
-            return Created($"/api/cities/{value.Id}", value);
+            return Created($"/api/cities", value);
         }
 
         // PUT api/city
@@ -50,9 +50,9 @@ namespace Ant.Controllers
 
         // DELETE api/city/3
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(City city)
         {
-            _cityRepository.Remove(id);
+            _cityRepository.Remove(city);
             return Ok();
         }
     }

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ant.IRepositories;
-using Ant.Models;
 using Ant.Repositories;
+using Contracts.IRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Model;
 
 namespace Ant
 {
@@ -26,7 +26,7 @@ namespace Ant
             if (env.IsEnvironment("Development"))
             {
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
+                //builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
             builder.AddEnvironmentVariables();
@@ -39,12 +39,12 @@ namespace Ant
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
+            //services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=AntDB;Trusted_Connection=True;";
-            services.AddDbContext<AntDBContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<CityDBContext>(options => options.UseSqlServer(connection));
             services.AddTransient<ICityRepository, CityRepository>();
         }
 
@@ -54,9 +54,9 @@ namespace Ant
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
+            /*app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseApplicationInsightsExceptionTelemetry();
+            app.UseApplicationInsightsExceptionTelemetry();*/
 
             app.UseMvc();
         }

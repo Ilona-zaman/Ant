@@ -1,12 +1,20 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Ant.Models
+namespace Model
 {
-    public partial class AntDBContext : DbContext
+    public class City
     {
-        public AntDBContext(DbContextOptions<AntDBContext> options)
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+    }
+
+    public class CityDBContext : DbContext
+    {
+        public CityDBContext(DbContextOptions<CityDBContext> options)
             : base(options)
         { }
 
