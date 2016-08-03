@@ -18,9 +18,9 @@ namespace Ant.Repositories
             _context = context;
         }
         
-        public City Get(int id)
+        public async Task<City> Get(int id)
         {
-            return _context.Cities.FirstOrDefault(p => p.Id == id);
+            return  _context.Cities.FirstOrDefault(p => p.Id == id);
         }
     }
 }

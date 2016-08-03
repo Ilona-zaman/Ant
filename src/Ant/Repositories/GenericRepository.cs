@@ -18,31 +18,31 @@ namespace Ant.Repositories
             _context = context;
         }
 
-        public void Add(T item)
+        public async Task Add(T item)
         {
             _context.Set<T>().Add(item);
             Save();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return _context.Set<T>();
         }
 
-        public void Remove(T item)
+        public async Task Remove(T item)
         {
             _context.Set<T>().Remove(item);
             Save();
         }
 
-        public object Update(T item)
+        public async Task<object> Update(T item)
         {
             var i = _context.Set<T>().Update(item);
             _context.SaveChanges();
             return i;
         }
 
-        public void Save()
+        public async Task Save()
         {
             _context.SaveChanges();
         }

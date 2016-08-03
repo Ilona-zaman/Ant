@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.IRepositories;
+using Contracts.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
@@ -13,31 +14,31 @@ namespace Ant.Controllers
     [Route("api/[controller]")]
     public class CityController : Controller
     {
-        private ICityRepository _cityRepository;
+        private ICityService _cityService;
 
-        public CityController(ICityRepository cityRepository)
+        public CityController(ICityService cityRepository)
         {
-            _cityRepository = cityRepository;
+            _cityService = cityRepository;
         }
         // GET: api/city
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_cityRepository.GetAll());
+            return Ok(_cityService.GetAllCities());
         }
 
         // GET api/city/3
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_cityRepository.Get(id));
+            return Ok(_cityService.GetCityById(id));
         }
 
         // POST api/city
         [HttpPost]
         public IActionResult Post([FromBody]City value)
         {
-            _cityRepository.Add(value);
+            _cityService.AddCity(value);
             return Created($"/api/cities", value);
         }
 
@@ -45,14 +46,14 @@ namespace Ant.Controllers
         [HttpPut]
         public IActionResult Put([FromBody]City value)
         {
-            return Ok(_cityRepository.Update(value));
+            return Ok(_cityService.UpdateCity(value));
         }
 
         // DELETE api/city/3
         [HttpDelete("{id}")]
         public IActionResult Delete(City city)
         {
-            _cityRepository.Remove(city);
+            _cityService.RemoveCity(city);
             return Ok();
         }
     }

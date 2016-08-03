@@ -1,9 +1,10 @@
-﻿using Model;
+﻿using System.Threading.Tasks;
+using Model;
 
 namespace Contracts.IRepositories
 {
     public interface ICityRepository: IGenericRepository<City>
     {
-        City Get(int id);
+        Task<City> Get(int id);
     }
 }

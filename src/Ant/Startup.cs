@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ant.Repositories;
+using Ant.Services;
 using Contracts.IRepositories;
+using Contracts.IServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -46,6 +48,7 @@ namespace Ant
             var connection = @"Server=(localdb)\mssqllocaldb;Database=AntDB;Trusted_Connection=True;";
             services.AddDbContext<CityDBContext>(options => options.UseSqlServer(connection));
             services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<ICityService, CityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
