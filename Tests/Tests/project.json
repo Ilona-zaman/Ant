@@ -1,0 +1,18 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "xunit": "2.1.0"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet463",
+        "portable-net45+win8"
+      ]
+    }
+  }
+}

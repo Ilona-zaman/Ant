@@ -13,7 +13,7 @@ namespace Ant.Repositories
     {
         private C _context;
 
-        public GenericRepository(C context)
+        protected GenericRepository(C context)
         {
             _context = context;
         }
@@ -21,30 +21,31 @@ namespace Ant.Repositories
         public async Task Add(T item)
         {
             _context.Set<T>().Add(item);
-            Save();
+            await Save();
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return _context.Set<T>();
+            var list = _context.Set<T>();
+            return await list.ToListAsync();
         }
 
         public async Task Remove(T item)
         {
             _context.Set<T>().Remove(item);
-            Save();
+            await Save();
         }
 
         public async Task<object> Update(T item)
         {
             var i = _context.Set<T>().Update(item);
-            _context.SaveChanges();
+            await Save();
             return i;
         }
 
         public async Task Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

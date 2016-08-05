@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Contracts.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ant.Repositories
 {
@@ -20,7 +21,7 @@ namespace Ant.Repositories
         
         public async Task<City> Get(int id)
         {
-            return  _context.Cities.FirstOrDefault(p => p.Id == id);
+            return  await _context.Cities.FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

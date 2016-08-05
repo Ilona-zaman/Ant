@@ -22,38 +22,38 @@ namespace Ant.Controllers
         }
         // GET: api/city
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(_cityService.GetAllCities());
+            return Ok(await _cityService.GetAllCities());
         }
 
         // GET api/city/3
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok(_cityService.GetCityById(id));
+            return Ok(await _cityService.GetCityById(id));
         }
 
         // POST api/city
         [HttpPost]
-        public IActionResult Post([FromBody]City value)
+        public async Task<IActionResult> Post([FromBody]City value)
         {
-            _cityService.AddCity(value);
+            await _cityService.AddCity(value);
             return Created($"/api/cities", value);
         }
 
         // PUT api/city
         [HttpPut]
-        public IActionResult Put([FromBody]City value)
+        public async Task<IActionResult> Put([FromBody]City value)
         {
-            return Ok(_cityService.UpdateCity(value));
+            return Ok(await _cityService.UpdateCity(value));
         }
 
         // DELETE api/city/3
         [HttpDelete("{id}")]
-        public IActionResult Delete(City city)
+        public async Task<IActionResult> Delete(City city)
         {
-            _cityService.RemoveCity(city);
+            await _cityService.RemoveCity(city);
             return Ok();
         }
     }
