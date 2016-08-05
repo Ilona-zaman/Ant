@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Contracts.IRepositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Ant.Repositories
+namespace EntityFrameworkRepository.Repositories
 {
     public abstract class GenericRepository<C, T> :
         IGenericRepository<T> where T : class where C : DbContext

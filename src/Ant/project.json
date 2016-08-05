@@ -16,7 +16,8 @@
     "Model": "1.0.0",
     "NETStandard.Library": "1.6.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
-    "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2-*"
+    "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2-*",
+    "EntityFrameworkRepository": "1.0.0-*"
   },
 
   "tools": {
@@ -26,7 +27,10 @@
 
   "frameworks": {
     "netcoreapp1.0": {
-      "imports": [ "portable-dnxcore50+net45+win8" ]
+      "imports": [
+        "net451",
+        "portable-dnxcore50+net45+win8"
+      ]
     }
   },
 
