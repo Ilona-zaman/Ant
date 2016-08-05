@@ -5,6 +5,7 @@
     "debugType": "portable"
   },
   "dependencies": {
+    "NETStandard.Library": "1.6.0",
     "xunit": "2.1.0"
   },
   "frameworks": {
@@ -14,5 +15,10 @@
         "portable-net45+win8"
       ]
     }
+  },
+  "runtimes": {
+    "win7-x64": {},
+    "win81-x64": {},
+    "win10-x64": {}
   }
 }
