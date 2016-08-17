@@ -1,26 +1,35 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityFrameworkRepository.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Model;
 using Xbehave;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Tests
+namespace ClassicTests
 {
-    public class CitiesRepositoryFeature: IDisposable
+    public class CitiesRepositoryFeature
     {
-        public CitiesRepositoryFeature()
+        private static DbContextOptions<CityDBContext> CreateNewContextOptions()
         {
-            CityDBContext context = new CityDBContext(GetOptions().Options);
-            context.Database.EnsureCreated();
-            context.Dispose();
+            // Create a fresh service provider, and therefore a fresh 
+            // InMemory database instance.
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+
+            // Create a new options instance telling the context to use an
+            // InMemory database and the new service provider.
+            var builder = new DbContextOptionsBuilder<CityDBContext>();
+            builder.UseInMemoryDatabase()
+                   .UseInternalServiceProvider(serviceProvider);
+
+            return builder.Options;
         }
 
-        public DbContextOptionsBuilder<CityDBContext> GetOptions()
+        private DbContextOptionsBuilder<CityDBContext> GetOptions()
         {
             var optionsBuilder = new DbContextOptionsBuilder<CityDBContext>();
             return optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AntDB;Trusted_Connection=True;");
@@ -36,7 +45,7 @@ namespace Tests
                 Name = "Grodno"
             });
            
-            "And given CityDBContext".x(() => context = new CityDBContext(GetOptions().Options)).Teardown(() => context.Dispose());
+            "And given CityDBContext".x(() => context = new CityDBContext(CreateNewContextOptions())).Teardown(() => context.Dispose());
 
             "And given City repository".x(() => repository = new CityRepository(context));
 
@@ -48,7 +57,7 @@ namespace Tests
         [Scenario]
         public async Task CityUpdating(City city, CityDBContext context, CityRepository repository)
         {
-            "Given CityDBContext".x(() => context = new CityDBContext(GetOptions().Options))
+            "Given CityDBContext".x(() => context = new CityDBContext(CreateNewContextOptions()))
                 .Teardown(() => context.Dispose());
 
             "And given City repository".x(() => repository = new CityRepository(context));
@@ -73,7 +82,7 @@ namespace Tests
         [Scenario]
         public async Task CityDeleting(City city, CityDBContext context, CityRepository repository)
         {
-            "Given CityDBContext".x(() => context = new CityDBContext(GetOptions().Options)).Teardown(() => context.Dispose());
+            "Given CityDBContext".x(() => context = new CityDBContext(CreateNewContextOptions())).Teardown(() => context.Dispose());
 
             "And given City repository".x(() => repository = new CityRepository(context));
 
@@ -94,7 +103,7 @@ namespace Tests
         [Scenario]
         public async Task CityGetAll(City city, CityDBContext context, CityRepository repository)
         {
-            "Given CityDBContext".x(() => context = new CityDBContext(GetOptions().Options)).Teardown(() => context.Dispose());
+            "Given CityDBContext".x(() => context = new CityDBContext(CreateNewContextOptions())).Teardown(() => context.Dispose());
 
             "And given City repository".x(() => repository = new CityRepository(context));
 
@@ -124,7 +133,7 @@ namespace Tests
         [Scenario]
         public async Task CityGetById(City city, CityDBContext context, CityRepository repository)
         {
-            "Given CityDBContext".x(() => context = new CityDBContext(GetOptions().Options)).Teardown(() => context.Dispose());
+            "Given CityDBContext".x(() => context = new CityDBContext(CreateNewContextOptions())).Teardown(() => context.Dispose());
 
             "And given City repository".x(() => repository = new CityRepository(context));
 
@@ -151,13 +160,6 @@ namespace Tests
             "When I get city by Id".x(() => gettingCity = repository.Get(city.Id).Result);
 
             "Then the city should exist in database".x(() => Assert.Equal(city, gettingCity));
-        }
-
-        public void Dispose()
-        {
-            CityDBContext context = new CityDBContext(GetOptions().Options);
-            context.Database.EnsureDeleted();
-            context.Dispose();
         }
     }
 }
