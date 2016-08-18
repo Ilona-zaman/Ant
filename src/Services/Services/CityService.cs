@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Contracts.IRepositories;
 using Contracts.IServices;
 using Model;
 
-namespace Ant.Services
+namespace Services.Services
 {
     public class CityService: ICityService
     {

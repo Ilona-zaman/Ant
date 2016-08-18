@@ -14,25 +14,15 @@ namespace ClassicTests
     {
         private static DbContextOptions<CityDBContext> CreateNewContextOptions()
         {
-            // Create a fresh service provider, and therefore a fresh 
-            // InMemory database instance.
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
-            // Create a new options instance telling the context to use an
-            // InMemory database and the new service provider.
             var builder = new DbContextOptionsBuilder<CityDBContext>();
             builder.UseInMemoryDatabase()
                    .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
-        }
-
-        private DbContextOptionsBuilder<CityDBContext> GetOptions()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<CityDBContext>();
-            return optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AntDB;Trusted_Connection=True;");
         }
 
         [Scenario]

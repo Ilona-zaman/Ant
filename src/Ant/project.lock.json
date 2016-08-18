@@ -3463,6 +3463,21 @@
         "runtime": {
           "netcoreapp1.0/Model.dll": {}
         }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.0",
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "Model": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netcoreapp1.0/Services.dll": {}
+        },
+        "runtime": {
+          "netcoreapp1.0/Services.dll": {}
+        }
       }
     },
     ".NETCoreApp,Version=v1.0/win10-x64": {
@@ -7100,6 +7115,21 @@
         },
         "runtime": {
           "netcoreapp1.0/Model.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.0",
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "Model": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netcoreapp1.0/Services.dll": {}
+        },
+        "runtime": {
+          "netcoreapp1.0/Services.dll": {}
         }
       }
     },
@@ -10742,6 +10772,21 @@
         "runtime": {
           "netcoreapp1.0/Model.dll": {}
         }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.0",
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "Model": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netcoreapp1.0/Services.dll": {}
+        },
+        "runtime": {
+          "netcoreapp1.0/Services.dll": {}
+        }
       }
     },
     ".NETCoreApp,Version=v1.0/win81-x64": {
@@ -14382,6 +14427,21 @@
         },
         "runtime": {
           "netcoreapp1.0/Model.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.0",
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "Model": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netcoreapp1.0/Services.dll": {}
+        },
+        "runtime": {
+          "netcoreapp1.0/Services.dll": {}
         }
       }
     }
@@ -20599,6 +20659,11 @@
       "type": "project",
       "path": "../Model/project.json",
       "msbuildProject": "../Model/Model.xproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/project.json",
+      "msbuildProject": "../Services/Services.xproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -20620,7 +20685,8 @@
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.Runtime.CoreCLR >= 1.0.2-*",
       "Model >= 1.0.0",
-      "NETStandard.Library >= 1.6.0"
+      "NETStandard.Library >= 1.6.0",
+      "Services >= 1.0.0-*"
     ],
     ".NETCoreApp,Version=v1.0": []
   },
